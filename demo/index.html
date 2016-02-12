@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>index</title>
+    <script src="jquery-2.2.0.js"></script>
+    <!-- <script src="zepto.min.js"></script>     -->
+    <script src="underscore-min.js"></script>
+    <script src="backbone-min.js"></script>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+<div class="app-frame v-page app" style="width:100%;height:100%;overflow:hidden;position:absolute;left:0;right:0;top:0;bottom:0;"></div>
+
+<script>
+
+
+var scrollView = window.scrollView = new Dbb.ScrollView();
+scrollView.optionsForScroll = function() {
+    return {
+        enablePullDown: true,
+        enablePullUp: true,
+        pullUpFlipOffset: -100,
+    };
+};
+scrollView.mountToEl(document.querySelector('.app-frame'));
+
+
+var collection = new Backbone.Collection();
+collection.comparator = function(model) {
+    return -model.get('id');
+};
+
+var collectionView = window.collectionView = new Dbb.CollectionView({
+    collection: collection,
+    tagName: 'ol',
+    className: 'v-list v-padding'
+});
+var tpl = _.template('\
+    <i class="v-box-flag"><b></b><span>专辑</span></i>\
+    <h2 class="v-box-title v-box-title-nowrap">\
+        <span><%= title %></span>\
+    </h2>\
+    <div class="v-box-pic">\
+        <span class="pic">\
+            <img src="<%= pic_url %>">\
+        </span>\
+    </div>\
+    <div class="v-box-text">\
+        <%= description %>\
+    </div>\
+    <div class="v-box-ft">\
+        <div class="v-left"><%= clicks %> 阅</div>\
+        <div class="v-right">\
+            <i class="icon ion-ios-timer-outline"></i>\
+            <time><%= create_time %></time>\
+        </div>\
+    </div>');
+collectionView.viewForItem = function(model) {
+    return new Dbb.ItemView({
+        model: model,
+        template: tpl,
+        tagName: 'li',
+        className: 'v-list-item v-box v-box-withflag v-margin-bottom'
+    });
+};
+
+scrollView.addSubView(collectionView);
+
+var time, item, arr = [];
+for (var i = 0; i<5; i++) {
+    obj = {
+        title: '测试条目的title' + i,
+        id: i,
+        pic_url: 'img.jpg',
+        description: '<div class="v-box-text">            简单描述一下这个稿件，这里算是图文的描述板块，这里算是图文的描述板块，如果这个图文做一个分行是这样的情况<br>看看分行了没有，如果没分行，就是没有识别到html了噢。</div>',
+        clicks: 23,
+        create_time: (time = new Date()).getFullYear() + '年' + (time.getMonth() + 1) + '月' + time.getDate() + '日',
+    };
+    arr.push(obj);
+}
+
+// 首次加载，无需重新排序
+console.time('test')
+collection.add(arr);
+// collection.reset(arr);
+console.timeEnd('test');
+
+
+</script>
+</body>
+</html>

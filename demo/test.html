@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>index</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+<script>
+// 首次加载，无需重新排序
+// console.time('test1');
+// var a = [];
+// var i;
+// for (i = 0 ; i < 10000; i ++) {
+//     a.push(document.createElement('div'));
+//     a[i].style.width = '100px';
+//     document.body.appendChild(a[i]);
+// }
+// console.timeEnd('test1');
+// //
+console.time('test2');
+var a = [];
+var i;
+for (i = 0 ; i < 10000; i ++) {
+    a.push(document.createElement('div'));
+}
+for (i = 0; i<10000; i++) {
+    a[i].style.width = '100px';
+}
+for (i = 0; i<10000; i++) {
+    document.body.appendChild(a[i]);
+}
+console.timeEnd('test2');
+</script>
+
+</body>
+</html>
