@@ -479,7 +479,7 @@ Dbb.View = Backbone.View.extend({
                 Dbb.error('视图 (cid: "' + views.cid + '") 已销毁，无法使用。');
                 return this;
             }
-            if (views._superView && views._superView === this) {
+            if (views._superview && views._superview === this) {
                 return this;
             }
             views = [views];
@@ -493,7 +493,7 @@ Dbb.View = Backbone.View.extend({
                     Dbb.error('视图 (cid: "' + current.cid + '") 已销毁，无法使用。');
                     continue;
                 }
-                if (current._superView && current._superView === this) {
+                if (current._superview && current._superview === this) {
                     continue;
                 }
                 views.push(current);
@@ -568,7 +568,7 @@ Dbb.View = Backbone.View.extend({
         }
         for (i = 0; i < viewsCount; i += 1) {
             current = views[i];
-            current._superView = this;
+            current._superview = this;
         }
 
 
@@ -636,7 +636,7 @@ Dbb.View = Backbone.View.extend({
 
         // 确定atIndex的值
         if (view !== null) {
-            if (view._superView === this) {
+            if (view._superview === this) {
                 atIndex = subViews.indexOf(view);
                 if (atIndex === -1) {
                     atIndex = undefined;
@@ -675,7 +675,7 @@ Dbb.View = Backbone.View.extend({
         this.options.supportLifeCycle &&
             this._lifeCycleTrigger('subViewWillRemove', view, this, options);
         subViews.splice(atIndex, 1);
-        delete view._superView;
+        delete view._superview;
 
 
         // 如果当前subView已经mounted，向所有子类传播viewWillUnMount

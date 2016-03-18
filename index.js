@@ -1,4 +1,5 @@
 var Dbb = require('./lib/dbb');
+require('./lib/object');
 require('./lib/view');
 require('./lib/collection-view');
 require('./lib/item-view');
