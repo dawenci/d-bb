@@ -1,11 +1,7 @@
 var Dbb = require('./lib/dbb');
-require('./lib/object');
-require('./lib/view');
-require('./lib/collection-view');
-require('./lib/item-view');
-require('./lib/scroll-view');
-require('./lib/controller');
-require('./lib/controller-manager');
-require('./lib/helpers');
+Dbb.View = require('./lib/view');
+Dbb.CollectionView = require('./lib/collection-view');
+Dbb.Controller = require('./lib/controller');
+Dbb.ControllerManager = require('./lib/controller-manager');
 
 module.exports = Dbb;
