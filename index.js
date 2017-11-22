@@ -1,8 +1,19 @@
-var Dbb = require('./lib/dbb');
-Dbb.View = require('./lib/view');
-Dbb.CollectionView = require('./lib/collection-view');
-Dbb.Controller = require('./lib/controller');
-Dbb.ControllerManager = require('./lib/controller-manager');
-window.Dbb = Dbb;
+'use strict'
 
-module.exports = Dbb;
+// 执行配置
+require('./lib/config')
+
+
+var eventbus = require('./lib/core/mixin/eventbus')
+var Dbb = window.Dbb = {}
+Dbb.$broadcast = eventbus.broacast
+Dbb.$listenToBus = eventbus.listenToBus
+
+Dbb.Collection     = Backbone.Collection
+Dbb.Model          = Backbone.Model
+Dbb.Events         = Backbone.Events
+Dbb.$              = Backbone.$
+Dbb.View           = require('./lib/core/view')
+Dbb.CollectionView = require('./lib/collection-view')
+
+module.exports = Dbb
