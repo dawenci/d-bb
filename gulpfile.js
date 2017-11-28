@@ -49,9 +49,6 @@ var babelify = require('babelify');
       .pipe(gulp.dest('./build/'))
       .pipe(sourcemaps.write('./')) // 写入 .map 文件
       .pipe(gulp.dest('./build/'))
-
-      // 额外输出到目的地
-      .pipe(gulp.dest('../../build/lib/'))
   }
 })()
 
