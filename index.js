@@ -1,19 +1,19 @@
 'use strict'
 
-// 执行配置
+// 导入配置
 require('./lib/config')
 
+const Events = require('./lib/core/events')
+const eventbus = require('./lib/core/mixin/eventbus')
+const Dbb = {}
 
-var eventbus = require('./lib/core/mixin/eventbus')
-var Dbb = window.Dbb = {}
-Dbb.$broadcast = eventbus.broacast
-Dbb.$listenToBus = eventbus.listenToBus
-
-Dbb.Collection     = Backbone.Collection
-Dbb.Model          = Backbone.Model
-Dbb.Events         = Backbone.Events
+Dbb.$broadcast     = eventbus.broacast
+Dbb.$listenToBus   = eventbus.listenToBus
 Dbb.$              = Backbone.$
+Dbb.Events         = Events
+Dbb.Collection     = require('./lib/core/collection')
+Dbb.Model          = require('./lib/core/model')
 Dbb.View           = require('./lib/core/view')
 Dbb.CollectionView = require('./lib/collection-view')
 
-module.exports = Dbb
+module.exports = window.Dbb = Dbb
