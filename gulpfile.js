@@ -50,8 +50,8 @@ var babelify = require('babelify');
       .pipe(sourcemaps.write('./')) // 写入 .map 文件
       .pipe(gulp.dest('./build/'))
 
-      // 额外输出到目的地
-      .pipe(gulp.dest('../../build/lib/'))
+      // // 额外输出到目的地
+      // .pipe(gulp.dest('../../build/lib/'))
   }
 })()
 

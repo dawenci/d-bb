@@ -11,6 +11,7 @@ Dbb.$broadcast     = eventbus.broacast
 Dbb.$listenToBus   = eventbus.listenToBus
 Dbb.$              = Backbone.$
 Dbb.Events         = Events
+Dbb.Object         = require('./lib/core/object')
 Dbb.Collection     = require('./lib/core/collection')
 Dbb.Model          = require('./lib/core/model')
 Dbb.View           = require('./lib/core/view')
